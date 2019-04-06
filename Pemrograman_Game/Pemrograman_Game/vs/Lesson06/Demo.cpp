@@ -1,6 +1,5 @@
 #include "Demo.h"
 
-
 Demo::Demo()
 {
 }
@@ -23,6 +22,8 @@ void Demo::Update(float deltaTime)
 		exit(0);
 	}
 
+	yVelocity += gravity;
+	ypos += yVelocity;
 	UpdatePlayerSpriteAnim(deltaTime);
 	ControlPlayerSprite(deltaTime);
 }
@@ -74,10 +75,39 @@ void Demo::ControlPlayerSprite(float deltaTime)
 		walk_anim = true;
 	}
 
+	if (IsKeyDown("Jump"))
+	{
+		if (onGround)//ypos+yVelocity>=yposGround)
+		{
+			yVelocity = -12.0f;
+			onGround = false;
+		}
+	}
+
+	if (IsKeyUp("Jump"))
+	{
+		if (yVelocity < -6.0f)
+		{
+			yVelocity = -6.0f;
+		}
+	}
+
+	yVelocity += gravity;
+	ypos +=  yVelocity;
+
+	if (ypos > yposGround) {
+		ypos = yposGround;
+		yVelocity = 0;
+		onGround = true;
+	}
 
 	// check collision between bart and crate
 	if (IsCollided(xpos, ypos, frame_width, frame_height, xpos2, ypos2, frame_width2, frame_height2)) {
-		xpos = oldxpos;
+		if (ypos == 0)
+		{
+			xpos = oldxpos;
+		}
+		ypos = ypos2 - frame_height;
 	}
 }
 
@@ -180,7 +210,7 @@ void Demo::BuildPlayerSprite()
 	xpos = (GetScreenWidth() - frame_width) / 2;
 	yposGround = GetScreenHeight() - frame_height;
 	ypos = yposGround;
-	gravity = 0.05f;
+	gravity = 0.1f;
 	xVelocity = 0.1f;
 
 	// Add input mapping
@@ -194,6 +224,7 @@ void Demo::BuildPlayerSprite()
 	InputMapping("Move Right", SDL_CONTROLLER_BUTTON_DPAD_RIGHT);
 	InputMapping("Move Left", SDL_CONTROLLER_BUTTON_DPAD_LEFT);
 	InputMapping("Quit", SDLK_ESCAPE);
+	InputMapping("Jump", SDLK_SPACE);
 }
 
 void Demo::BuildCrateSprite()

@@ -10,7 +10,7 @@
 
 #include "Game.h"
 
-#define NUM_FRAMES 2
+#define NUM_FRAMES 8
 #define FRAME_DUR 80
 
 using namespace glm;
@@ -24,25 +24,16 @@ public:
 	virtual void Init();
 	virtual void Update(float deltaTime);
 	virtual void Render();
-	float frame_width = 0, frame_height = 0, frame_width_c = 0, frame_height_c = 0, frame_width_l = 0, frame_height_l = 0;
+	float frame_width = 0, frame_height = 0;
 private:
-	float frame_dur = 0, xpos = 0, ypos = 0, gravity = 0, xVelocity = 0, yVelocity = 0, yposGround = 0, xVelocityc = 0, xposc = 0, yposc = 0, xposl = 0, yposl = 0, oldxpos = 0;
+	float frame_dur = 0, xpos = 0, ypos = 0, gravity = 0, xVelocity = 0, yVelocity = 0, yposGround = 0;
 	GLuint VBO, VAO, EBO, texture, program;
-	GLuint VBOl, VAOl, EBOl, texturel, programl;
-	GLuint VBOc, VAOc, EBOc, texturec, programc;
 	bool walk_anim = false, onGround = true;
 	unsigned int frame_idx = 0, flip = 0;
 	void BuildPlayerSprite();
-	void BuildLandSprite();
-	void BuildCactoosSprite();
 	void DrawPlayerSprite();
-	void DrawLandSprite();
-	void DrawCactoosSprite();
 	void UpdateSpriteAnim(float deltaTime);
 	void ControlPlayerSprite(float deltaTime);
-	void ControlCactoosMove(float deltaTime);
-	bool IsCollided(float x1, float y1, float width1, float height1, float x2, float y2, float width2, float height2);
-
 };
 #endif
 

@@ -22,7 +22,6 @@
     <ProjectGuid>{FA78C17D-B6FF-4D70-BEC0-1A5E2A959B30}</ProjectGuid>
     <RootNamespace>Lesson03</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
-    <ProjectName>DinoGame</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -128,18 +127,11 @@
     <ClInclude Include="Game.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="cactoos.png" />
-    <Image Include="dinosaur.png" />
     <Image Include="homeranim.png" />
-    <Image Include="land.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="spriteAnim.frag" />
     <None Include="spriteAnim.vert" />
-    <None Include="spriteCactoos.frag" />
-    <None Include="spriteCactoos.vert" />
-    <None Include="spriteLand.frag" />
-    <None Include="spriteLand.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Demo.cpp" />

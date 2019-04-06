@@ -127,7 +127,9 @@
     <ClInclude Include="Game.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="greenkid.png" />
     <Image Include="homeranim.png" />
+    <Image Include="jumpmegam.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="spriteAnim.frag" />
