@@ -20,6 +20,8 @@ void Demo::Init()
 	InputMapping("SelectButton", SDLK_RETURN);
 	InputMapping("NextButton", SDLK_DOWN);
 	InputMapping("PrevButton", SDLK_UP);
+	InputMapping("SpaceButton", SDLK_SPACE);
+	isShow = false;
 }
 
 void Demo::DeInit() {
@@ -28,27 +30,33 @@ void Demo::DeInit() {
 
 void Demo::Update(float deltaTime)
 {
-	if (IsKeyDown("SelectButton")) {
-		if (activeButtonIndex == 2) {
-			SDL_Quit();
-			exit(0);
-		}
+	if (IsKeyDown("SpaceButton")) {
+		isShow = !isShow;
 	}
 
-	if (IsKeyUp("NextButton")) {
-		if (activeButtonIndex < NUM_BUTTON - 1) {
-			activeButtonIndex = activeButtonIndex + 1;
-			SDL_Delay(150);
+	if (isShow)
+	{
+		if (IsKeyDown("SelectButton")) {
+			if (activeButtonIndex == 2) {
+				SDL_Quit();
+				exit(0);
+			}
+		}
+
+		if (IsKeyUp("NextButton")) {
+			if (activeButtonIndex < NUM_BUTTON - 1) {
+				activeButtonIndex = activeButtonIndex + 1;
+				SDL_Delay(150);
+			}
+		}
+
+		if (IsKeyUp("PrevButton")) {
+			if (activeButtonIndex > 0) {
+				activeButtonIndex = activeButtonIndex - 1;
+				SDL_Delay(150);
+			}
 		}
 	}
-
-	if (IsKeyUp("PrevButton")) {
-		if (activeButtonIndex > 0) {
-			activeButtonIndex = activeButtonIndex - 1;
-			SDL_Delay(150);
-		}
-	}
-
 }
 
 void Demo::Render()
@@ -67,11 +75,11 @@ void Demo::Render()
 	projection = ortho(0.0f, static_cast<GLfloat>(GetScreenWidth()), static_cast<GLfloat>(GetScreenHeight()), 0.0f, -1.0f, 1.0f);
 	glUniformMatrix4fv(glGetUniformLocation(this->program, "projection"), 1, GL_FALSE, value_ptr(projection));
 
-
-	RenderText("./Button and Text Renderer Demo", 10, 10, 1.0f, vec3(244.0f / 255.0f, 12.0f / 255.0f, 116.0f / 255.0f));
-
-	RenderButton();
-
+	if (isShow)
+	{
+		RenderText("./Button and Text Renderer Demo", 10, 10, 1.0f, vec3(244.0f / 255.0f, 12.0f / 255.0f, 116.0f / 255.0f));
+		RenderButton();
+	}
 }
 
 void Demo::InitText() {

@@ -26,6 +26,12 @@
     <Image Include="homeranim.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="jumpmegam.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="greenkid.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="spriteAnim.frag">

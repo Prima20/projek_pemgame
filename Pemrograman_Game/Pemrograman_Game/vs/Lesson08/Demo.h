@@ -49,6 +49,7 @@ private:
 	GLuint texture[NUM_BUTTON], hover_texture[NUM_BUTTON], VBO, VBO2, VAO, VAO2, program;
 	float button_width[NUM_BUTTON], button_height[NUM_BUTTON], hover_button_width[NUM_BUTTON], hover_button_height[NUM_BUTTON];
 	int activeButtonIndex = 0;
+	bool isShow;
 };
 #endif
 
